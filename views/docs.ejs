@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>DOCS</title>
+  <meta name="description" content="The Farming Docs">
+  <meta name="author" content="Cakic Milan">
+
+  <link rel="stylesheet" href="/styles.css">
+</head>
+
+<body style="background-color: palegoldenrod;">
+  <h1 style='text-align: center; background-color: orange;padding: 10px;'>Harvesting App Rest Api</h1>
+  <div style='width: 80%; margin: 0 auto;'>
+    <h3>Requests</h3>
+    <p><span style='padding: 5px; background-color: orange; margin: 5px;'>POST</span>/login <strong>=> </strong> with
+      data {email: string,
+      password: string}</p>
+    <p><span style='padding: 5px; background-color: orange; margin: 5px;'>POST</span>/signup <strong>=> </strong> with
+      data {email:
+      string,
+      password: string, name: string}</p>
+    <h3>All requests requires token, so signup and login must be provided first, and header with "Autorization" holding
+      the token must be sent with each request (without 'Bearer')</h3>
+    <ul>
+      <li> <span style="font-weight: bold;">GET: '/'</span> (all data required for printing barcodes, employees,
+        variety)</li>
+      <li> <span style="font-weight: bold; margin-right: 15px;">GET: '/record' </span>(All barcode data (only those with
+        data inside) for current day)</li>
+      <li> <span style="font-weight: bold; margin-right: 15px;">GET: '/base' </span>(All barcodes, used and unused)</li>
+      <li> <span style="font-weight: bold; margin-right: 15px;">GET: '/report' </span>(Current data)</li>
+      <li> <span style="font-weight: bold; margin-right: 15px;">GET: '/analyse' </span>(Calculated data for each sector)
+      </li>
+      <li> <span style="font-weight: bold; margin-right: 15px;">GET: '/employees' </span>(All created employees)</li>
+      <li> <span style="font-weight: bold; margin-right: 15px;">GET: '/print' </span>(Displays barcodes that arent
+        printed)</li>
+      <hr>
+      <li style="font-weight:300"><span style="font-weight: bold; margin-right: 15px;">POST: '/add/variety'
+        </span>{variety: 'some variety
+        string'} <strong>=> </strong> (Receives
+        employee data)</li>
+      <li style="font-weight:300"><span style="font-weight: bold; margin-right: 15px;">POST: '/add/supervizor' </span>{
+        supervizor:
+        'supervizor',
+        username: 'email adress',
+        password: 'password'} <strong>=> </strong> (Receives
+        employee data)</li>
+      <li style="font-weight:300"><span style="font-weight: bold; margin-right: 15px;">POST: '/add/employee' </span>{
+        name: 'name',
+        lastName: 'lastName',
+        phone: 'phone'} <strong>=> </strong> (Receives
+        employee data)</li>
+      <li style="font-weight:300"><span style="font-weight: bold; margin-right: 15px;">POST: '/employee' </span>{id:
+        'someid'} <strong>=> </strong> (Receives
+        employee data)</li> </span></li>
+      <li style="font-weight:300"><span style="font-weight: bold; margin-right: 15px;">POST: '/deleteEmployee'
+        </span>{id: 'someid'} <strong>=> </strong> (Delete
+        employee with id)</li>
+      <li style="font-weight:300"><span style="font-weight: bold; margin-right: 15px;">POST: '/deleteBox'</span></li>
+      <li style="font-weight:300"><span style="font-weight: bold; margin-right: 15px;">POST: '/transferBox'</span><br>
+        {<br>
+        <strong>onWho: </strong>'id',
+        <strong>fromWho: </strong>'id'<br>
+        }<br> <strong>=> </strong>
+        (transfer barcodes from one employee tho other (Deletes
+        fromWho))</li>
+
+      <li style="font-weight:300"><span style="font-weight: bold; margin-right: 15px;">POST: '/printed' </span>(Confirms
+        printed barcodes)</li>
+      <li style="font-weight:300"><span style="font-weight: bold; margin-right: 15px;">POST: '/' </span><br>
+        {<br>
+        <strong>boxNamePrefix:</strong>
+        'three letters of choise',<br>
+        <strong>boxPrefix: </strong>'current day as number',<br>
+        <strong>sector: </strong>'any number',<br>
+        <strong>variety: </strong>'You Have it after get('/')',<br>
+        <strong>boxFixedPrefix: </strong>'4 digits representing date (06/20)',<br>
+        <strong>boxNumber: </strong>'amount of barcodes to print',<br>
+        <strong>employee:</strong> 'employee to sign barcode (You Have it after get('/'))'<br>
+        }<br> <strong>=> </strong>(Sends
+        the data into databaseand receives barcodes to display) </li><br>
+      <li style="font-weight:200"><span style="font-weight: bold; margin-right: 15px;">POST: '/report/day' </span>{ day:
+        'day', month: 'month',
+        year: 'year'} <strong>=> </strong> (gets data for selected date)</li>
+      <li style="font-weight:300"><span style="font-weight: bold; margin-right: 15px;">POST:
+          '/report/close'</span>{confirmation: 'YES or NO'}
+        (closes the day if
+        confirmed)</li>
+    </ul>
+  </div>
+</body>
+
+</html>

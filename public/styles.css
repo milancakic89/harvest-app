@@ -1,0 +1,323 @@
+* {
+  box-sizing: border-box;
+  font-family: sans-serif;
+}
+
+.tabela tr:nth-child(odd) {
+  background-color: rgb(226, 226, 226);
+}
+
+.containers {
+  display: grid;
+  grid-template-areas:
+    "nav"
+    "main"
+    "footer";
+  max-width: 1100px;
+  margin: 0 auto;
+  height: auto;
+  min-height: 500px;
+  height: calc(100vh - 100px);
+
+  overflow-x: auto;
+}
+
+.baza {
+  margin: 0 auto;
+  min-height: 300px;
+  height: calc(100vh - 100px);
+  max-width: 1100px;
+  overflow: auto;
+}
+
+.center {
+  text-align: center;
+}
+
+.navigationList {
+  list-style-type: none;
+
+  text-decoration: none;
+}
+
+.navigationItem {
+  display: inline-block;
+  margin: 0;
+}
+
+.navigationItem:hover {
+  background-color: rgb(116, 112, 112);
+}
+
+.navigationItem a {
+  text-decoration: none;
+  color: #fff;
+}
+
+.nav-list {
+  margin: 0;
+  height: 100%;
+  text-align: center;
+
+}
+
+#navigation {
+  width: 100%;
+  max-width: 1100px;
+  grid-area: nav;
+  padding: 0;
+  margin: 0 auto;
+
+
+}
+
+th {
+  background-color: rgb(204, 204, 248);
+}
+
+.main-content {
+  grid-area: main;
+  width: 100%;
+
+}
+
+.footer {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  min-height: 50px;
+  background-color: rgb(116, 112, 112);
+
+}
+
+.border-around {
+  border: 1px solid black;
+
+}
+
+.padding-2 {
+  text-indent: 5px !important;
+}
+
+.bg-gray {
+  background-color: rgb(197, 28, 28);
+}
+
+.container1100 {
+  margin: 0 auto;
+  max-width: 1100px;
+  width: 100%;
+}
+
+.button-correction-2 {
+  margin-top: -2px !important;
+}
+
+.button-correction-5 {
+  margin-top: -5px !important;
+}
+
+.main-container {
+  margin: 0 auto;
+  max-width: 1100px;
+  -webkit-box-shadow: 0px -1px 26px -3px rgba(179, 179, 179, 1);
+  -moz-box-shadow: 0px -1px 26px -3px rgba(179, 179, 179, 1);
+  box-shadow: 0px -1px 26px -3px rgba(179, 179, 179, 1);
+}
+
+.mw-200 {
+  min-width: 250px;
+  max-width: 350px;
+}
+
+.d-inline-block {
+  display: inline-block;
+}
+
+.max-200 {
+  max-width: 200px;
+}
+
+.max-w-100 {
+  max-width: 100px;
+}
+
+.y-auto-scroll {
+  overflow-y: auto;
+}
+
+.min-300 {
+  height: 300px !important;
+}
+
+.w-60px {
+  max-width: 3.75rem;
+}
+
+.w-50px {
+  max-width: 3.12rem;
+}
+
+.w-70px {
+  max-width: 4.375rem;
+}
+
+.w-80px {
+  max-width: 5rem;
+}
+
+.w-40px {
+  max-width: 2.5rem;
+}
+
+.w-30px {
+  max-width: 1.875rem;
+}
+
+.mnb-1 {
+  margin-bottom: -0.25rem;
+}
+
+.mnt-1 {
+  margin-top: -0.25rem;
+}
+
+.mnl-1 {
+  margin-left: -0.25rem;
+}
+
+.mnr-1 {
+  margin-right: -0.25rem;
+}
+
+.lightgray {
+  background-color: rgb(240, 239, 239);
+}
+
+.px-4 {
+  padding-left: 1.25rem !important;
+  padding-right: 1.25rem !important;
+}
+
+.py-4 {
+  padding-top: 1.25rem !important;
+  padding-bottom: 1.25rem !important;
+}
+
+.mTop {
+  margin-top: 50px;
+}
+
+.darker {
+  background-color: rgb(219, 218, 218);
+}
+
+.active {
+  background-color: rgb(104, 103, 103);
+}
+
+.box {
+  text-transform: uppercase;
+}
+
+.custom-25 {
+  width: 25%;
+}
+
+.max-100 {
+  max-width: 100px;
+}
+
+.max-150 {
+  max-width: 120px;
+}
+
+.custom-50 {
+  min-width: 250px;
+}
+
+.welcome {
+  position: absolute;
+  left: 5px;
+  top: 5px;
+}
+
+.error-message {
+  height: auto;
+  margin: 10px auto;
+  min-width: 50%;
+  max-width: 650px;
+}
+
+.b-bottom {
+  -webkit-box-shadow: 0px -1px 5px 4px rgba(179, 179, 179, 1);
+  -moz-box-shadow: 0px -1px 5px 4px rgba(179, 179, 179, 1);
+  box-shadow: 0px -1px 5px 4px rgba(179, 179, 179, 1);
+}
+
+.analise-perfektno {
+  background-color: rgb(2, 170, 44);
+}
+
+.analise-super {
+  background-color: rgb(120, 207, 6);
+}
+
+.analise-dobro {
+  background-color: rgb(184, 216, 6);
+}
+
+@media (max-width: 900px) {
+  .w-sm-75 {
+    width: 75% !important;
+  }
+
+  .custom-50 {
+    width: 50%;
+  }
+
+  .custom-25 {
+    width: 25%;
+  }
+
+  .max-100 {
+    max-width: 100px;
+  }
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.manual-dropdown {
+  max-height: 400px;
+  height: 350px;
+  width: 300px;
+  margin: 0 auto;
+  z-index: 10;
+  overflow-y: auto;
+}
+
+.hide-box {
+  display: none;
+}
+
+.show-box {
+  display: block;
+}
+
+/*
+.m--1{
+  margin-top: -5px;
+}*/
+.oldInputs {
+  max-height: 200px;
+  overflow: scroll;
+}
+
+.scroll-div {
+  max-height: 60px;
+  overflow-y: auto;
+}
