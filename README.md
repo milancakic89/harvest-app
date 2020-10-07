@@ -1,4 +1,4 @@
-# farming-rest
+# Harvest App
 
 ## Refactored "berba" repository to rest api
 
