@@ -427,7 +427,7 @@ exports.postMeasurement = (req, res, next) => {
   var employee = req.user.body.employee;
   let sector = Number(req.user.body.sector)// || req.body.sectorStari;
   let line = Number(req.user.body.line)// || req.body.redStari;
-
+  console.log(amount, id, employee, sector, line, req.user.createdBy)
 
   if (isNaN(amount) == true || isNaN(sector) == true || isNaN(line) == true) {
     res.json({ message: 'field must contain numbers', success: false })
@@ -437,10 +437,8 @@ exports.postMeasurement = (req, res, next) => {
 
     Boxes.findOne({ _id: id, supervizor: req.user.createdBy })
       .then(box => {
+
         if (box) {
-          if (amount > req.session.maximum) {
-            return res.json({ message: `Boxes must contain maximum of ${req.session.maximum}(kg), a vasa iznosi ${amount} (kg)`, success: false })
-          }
           let date = new Date();
           let day = date.getDate();
           let month = date.getMonth()
@@ -460,12 +458,15 @@ exports.postMeasurement = (req, res, next) => {
           box.employee = employee;
           box.amount = amount;
           box.time = time;
-          box.measurement = req.session.supervizor
-          box.save();
-          return res.json({ message: 'Success', success: true })
+          // box.measurement = req.session.supervizor
+          return box.save();
+
         } else {
           res.json({ message: 'error, box must have sector', success: false })
         }
+      })
+      .then(done => {
+        return res.json({ message: 'Success', success: true })
       })
       .catch(error => {
         res.json({ message: 'Error', success: true, error: error })
