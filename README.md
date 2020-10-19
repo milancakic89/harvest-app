@@ -1,7 +1,5 @@
 # Harvest App
 
-## Refactored "berba" repository to rest api
-
 Application is separated into two parts to reduce complexity.
 
 ## Major purpose of the application is to track:
