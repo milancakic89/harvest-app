@@ -9,7 +9,7 @@ router.get("/measurement", isAuth, mobileController.getMeasurement);
 router.post("/measurement/record", isAuth, mobileController.postMeasurement);
 router.post("/barcode/record", isAuth, mobileController.postBarcode);
 router.post("/measurement", isAuth, mobileController.postFilter);
-router.get('/total', isAuth, mobileController.getIMobileReport);
+router.get('/total', isAuth, mobileController.getMobileReport);
 router.post('/filterEmployee', isAuth, mobileController.postEmployee);
 router.get('/barcode', isAuth, mobileController.getBarcode)
 router.get('/barcode/:box', isAuth, mobileController.getBoxBarcode)

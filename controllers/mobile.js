@@ -241,7 +241,7 @@ exports.postEmployee = (req, res, next) => {
   }
 }
 
-exports.getIMobileReport = (req, res, next) => {
+exports.getMobileReport = (req, res, next) => {
   Boxes.find({ printed: true, supervizor: req.user.createdBy })
     .then(printedBoxes => {
       if (Array.isArray(printedBoxes) && printedBoxes.length > 0) {
@@ -262,7 +262,7 @@ exports.getIMobileReport = (req, res, next) => {
         for (let i = 0; i < printedBoxes.length; i++) {
           for (let j = 0; j < reportData.length; j++) {
             if (printedBoxes[i].employee == reportData[j].name) {
-              reportData[j].amount += printedBoxes[i].amount;
+              reportData[j].amount += printedBoxes[i].amount.toFixed(2);
               if (printedBoxes[i].amount > 0) {
                 reportData[j].boxes++;
               }
@@ -282,7 +282,7 @@ exports.getIMobileReport = (req, res, next) => {
 
         return res.json({
           data: reportData,
-          total: total,
+          total: total.toFixed(2),
           boxes: boxes,
           success: true
         })
