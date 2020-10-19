@@ -262,18 +262,19 @@ exports.getMobileReport = (req, res, next) => {
         for (let i = 0; i < printedBoxes.length; i++) {
           for (let j = 0; j < reportData.length; j++) {
             if (printedBoxes[i].employee == reportData[j].name) {
-              reportData[j].amount += printedBoxes[i].amount.toFixed(2);
+              reportData[j].amount += printedBoxes[i].amount
               if (printedBoxes[i].amount > 0) {
                 reportData[j].boxes++;
               }
-
             }
           }
         }
+
         let total = 0;
         let boxes = 0;
         reportData.forEach(box => {
-          total += box.amount;
+          total += Number(box.amount.toFixed(2));
+          box.amount = Number(box.amount.toFixed(2))
           if (box.amount > 0) {
             boxes += box.boxes;
           }
@@ -282,7 +283,7 @@ exports.getMobileReport = (req, res, next) => {
 
         return res.json({
           data: reportData,
-          total: total.toFixed(2),
+          total: Number(total.toFixed(2)),
           boxes: boxes,
           success: true
         })
