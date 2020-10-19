@@ -663,10 +663,12 @@ exports.getReport = (req, res, next) => {
           let box = 0;
           calculated.forEach(box => {
             total += box.amount;
+            box.amount = Number(box.amount.toFixed(2));
             if (box.amount > 0) {
               box += box.box;
             }
           })
+          total = Number(total.toFixed(2));
           return res.json({
             years: years,
             date: today,
