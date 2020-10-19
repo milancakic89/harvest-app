@@ -148,7 +148,7 @@ exports.postUpload = (req, res, next) => {
 }
 
 exports.postEmployee = (req, res, next) => {
-  let id = req.body.id;
+  let id = req.body.id.toString();
   var employees;
   if (id == 'all') {
     Employees.find({ supervizor: req.user.createdBy })
@@ -194,38 +194,37 @@ exports.postEmployee = (req, res, next) => {
         })
       })
   } else {
-    if (id != '') {
-      Employees.find({ supervizor: req.user.createdBy })
+    if (id != '' && id != "all") {
+      Employees.findOne({ _id: id })
         .then(response => {
-          if (Array.isArray(response) && response.length > 0) {
+          if (response) {
             return employees = response;
           }
         })
-        .then(allEmployees => {
-          const selected = allEmployees.filter(employee => {
-            return employee._id == id;
-          })
-          Boxes.find({ employee: selected[0].name })
+        .then(employee => {
+          Boxes.find({ employee: employee.name })
             .then(boxes => {
+
               if (Array.isArray(boxes) && boxes.length > 0) {
                 boxes.sort();
+
                 return res.json({
                   boxes: boxes,
-                  employees: employees,
+                  employees: [],
                   success: true,
                   message: 'Success'
                 })
               } else {
-                res.json({
+                return res.json({
                   boxes: boxes,
-                  employees: employees,
+                  employees: [],
                   success: false,
                   message: 'Success'
                 })
               }
             })
             .catch(error => {
-              return res.json({ message: 'Error occured', success: false })
+              return res.json({ message: 'Error occured', success: false, error: error })
             })
         })
         .catch(error => {
