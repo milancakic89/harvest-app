@@ -2,9 +2,7 @@ const Employees = require('../model/Employees');
 const Boxes = require('../model/Boxes');
 
 exports.postBarcode = (req, res, next) => {
-  if (!req.session.isLogged) {
-    return res.json({ message: "Login first", success: true });
-  }
+
   let amount = Number(req.body.amount)
   var box = req.body.box;
   var employee = req.body.employee;
@@ -19,10 +17,10 @@ exports.postBarcode = (req, res, next) => {
     Boxes.findOne({ box: box })
       .then(box => {
         if (box) {
-          if (amount > req.session.maximum) {
+          if (amount) {
             return res.json({
               success: false,
-              message: `Barcode maximum is ${req.session.maximum}(kg), and requested is ${amount} (kg)`
+              message: `Success`
             });
           }
           let date = new Date();
@@ -44,7 +42,6 @@ exports.postBarcode = (req, res, next) => {
           box.employee = employee;
           box.amount = amount;
           box.time = time;
-          box.measurement = req.session.supervizor
           box.save();
           return res.json({ message: 'Success', success: true })
         } else {
@@ -107,9 +104,7 @@ exports.getBarcode = (req, res, next) => {
 }
 
 exports.postUpload = (req, res, next) => {
-  if (!req.session.isLogged) {
-    return res.json({ message: 'Login first', success: false })
-  }
+
   let notify = false;
   let data = [];
   for (let i = 0; i < req.body.box.length; i++) {
@@ -127,12 +122,12 @@ exports.postUpload = (req, res, next) => {
         })
         function updateSingle(singleBox) {
           data.forEach(response => {
-            if (esponse.box === singleBox.box) {
-              singleBox.amount = esponse.amount
+            if (response.box === singleBox.box) {
+              singleBox.amount = response.amount
               if (esponse.amount > 0) {
                 singleBox.inUse = true;
               }
-              if (esponse.amount > req.session.maximum) {
+              if (response.amount) {
                 notify = true;
                 return;
               }
@@ -143,7 +138,7 @@ exports.postUpload = (req, res, next) => {
         if (notify !== true) {
           return res.json({ message: 'success', success: true })
         } else {
-          return res.json({ message: `Some boxes are over ${req.session.maximum} (kg), NOT SAVED`, success: false });
+          return res.json({ message: `Success`, success: false });
         }
       }
     })
@@ -304,7 +299,7 @@ exports.getIMobileReport = (req, res, next) => {
 }
 
 exports.postFilter = (req, res, next) => {
-  let prefix = req.user.body.prefix.toUpperCase();
+  let prefix = req.user.body.prefix.toUpperCase() || '';
   let employees = [];
   Employees.find({ supervizor: req.user.createdBy })
     .then(Employees => {
@@ -330,8 +325,6 @@ exports.postFilter = (req, res, next) => {
                 employees: employees,
                 prefix: prefix,
                 boxes: filtered,
-                admin: req.session.admin == true ? true : false,
-                supervizor: req.session.supervizor ? req.session.supervizor : 'Login',
                 success: true
               })
                 ;
@@ -340,8 +333,6 @@ exports.postFilter = (req, res, next) => {
                 prefix: '',
                 employees: employees,
                 boxes: boxes,
-                admin: req.session.admin == true ? true : false,
-                supervizor: req.session.supervizor ? req.session.supervizor : 'Login',
                 success: true
               });
             }
@@ -350,14 +341,10 @@ exports.postFilter = (req, res, next) => {
         Boxes.find({ printed: true })
           .then(boxes => {
             if (Array.isArray(boxes) && boxes.length > 0) {
-              req.session.prefix = '';
               return res.json({
                 prefix: prefix,
                 employees: employees,
-                error: req.flash('error'),
                 boxes: boxes,
-                admin: req.session.admin == true ? true : false,
-                supervizor: req.session.supervizor ? req.session.supervizor : 'Login',
                 success: true
               })
                 ;
@@ -365,15 +352,15 @@ exports.postFilter = (req, res, next) => {
               return res.json({
                 prefix: '',
                 employees: employees,
-                error: req.flash('error'),
                 boxes: boxes,
-                admin: req.session.admin == true ? true : false,
-                supervizor: req.session.supervizor ? req.session.supervizor : 'Login',
                 success: true
               })
             }
           })
       }
+    })
+    .catch(er => {
+      console.log(er)
     })
 
 
@@ -403,13 +390,11 @@ exports.postUpdateMeasurement = (req, res, next) => {
         box.date = complete;
         box.time = time;
         box.stari_unosi = true;
-        box.measurement = req.session.supervizor
         if (value > 0) {
           box.inUse = true;
         }
-        if (box.amount > req.session.maximum) {
-          req.flash('warning', `Sacuvano. Kutija ima preko `)
-          res.json({ message: `Succes with warning on box weight over ${req.session.maximum} (kg)!!!`, success: true })
+        if (box.amount) {
+          res.json({ message: `Succes` })
         }
         else { res.json({ message: "Success", success: true }) }
         box.save()
@@ -532,17 +517,13 @@ exports.getIdBoxes = (req, res, next) => {
               return res.json({
                 employees: Employees,
                 boxes: responce,
-                success: true,
-                admin: req.session.admin == true ? true : false,
-                supervizor: req.session.supervizor ? req.session.supervizor : 'Login'
+                success: true
               });
               ;
             } else {
               return res.json({
                 boxes: '',
                 employees: '',
-                admin: req.session.admin == true ? true : false,
-                supervizor: req.session.supervizor ? req.session.supervizor : 'Login',
                 success: true
               });
             }
