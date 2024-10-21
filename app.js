@@ -1,5 +1,6 @@
 const express = require("express");
 const path = require("path");
+const cors = require('cors')
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const adminRoutes = require("./routes/admin");
@@ -9,7 +10,7 @@ const addRoutes = require('./routes/add');
 require('dotenv').config();
 
 const app = express();
-console.clear()
+app.use(cors());
 app.set("view engine", "ejs");
 app.set("views", "views");
 
