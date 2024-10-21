@@ -19,7 +19,7 @@ app.use('*',(req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', 'https://farming-harvesting.web.app')
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, DELETE')
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Autorization')
-  res.send({test: 'OK'});
+  next()
   
 })
 
