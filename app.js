@@ -17,7 +17,7 @@ app.use(bodyParser.json());
 
 app.options('*', (req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', 'https://harvest-app-66x0.onrender.com')
-  next()č
+  next();
 });
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', 'https://harvest-app-66x0.onrender.com')
