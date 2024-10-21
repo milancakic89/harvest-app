@@ -13,11 +13,11 @@ const app = express();
 app.set("view engine", "ejs");
 app.set("views", "views");
 
-app.use((req, res, next) => {
+app.options((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', 'https://farming-harvesting.web.app')
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, DELETE')
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Autorization')
-  next()
+  res.sendStatus(204);
 })
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, "public")));
