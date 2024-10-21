@@ -10,6 +10,7 @@ const addRoutes = require('./routes/add');
 require('dotenv').config();
 
 const app = express();
+app.set('trust proxy', true);
 app.set("view engine", "ejs");
 app.set("views", "views");
 
