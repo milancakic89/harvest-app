@@ -10,26 +10,15 @@ const addRoutes = require('./routes/add');
 require('dotenv').config();
 
 const app = express();
-app.use(cors());
 app.set("view engine", "ejs");
 app.set("views", "views");
 
-
-
-app.options('*', (req, res) => {
-  res.setHeader('Access-Control-Allow-Origin', 'https://farming-harvesting.web.app');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, DELETE');
-   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Autorization')
-  res.send();
-});
-
-app.use('*', (req, res, next) => {
+app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', 'https://farming-harvesting.web.app')
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, DELETE')
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Autorization')
   next()
 })
-
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, "public")));
 
