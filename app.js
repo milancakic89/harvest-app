@@ -14,7 +14,7 @@ app.use(cors());
 app.set("view engine", "ejs");
 app.set("views", "views");
 
-app.use(bodyParser.json());
+
 
 app.options('*', (req, res,next) => {
    res.setHeader('Access-Control-Allow-Origin', 'https://farming-harvesting.web.app')
@@ -27,6 +27,8 @@ app.use('*', (req, res, next) => {
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Autorization')
   next()
 })
+
+app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, "public")));
 
 
