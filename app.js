@@ -14,8 +14,13 @@ app.set("view engine", "ejs");
 app.set("views", "views");
 
 app.use(bodyParser.json());
+
+app.options('*', (req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', 'https://harvest-app-66x0.onrender.com')
+  next()č
+});
 app.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', 'https://harvest-app-66x0.onrender.com/')
+  res.setHeader('Access-Control-Allow-Origin', 'https://harvest-app-66x0.onrender.com')
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST')
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Autorization')
   next()
