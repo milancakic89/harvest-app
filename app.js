@@ -16,7 +16,7 @@ app.set("views", "views");
 
 
 
-app.options('/your-endpoint', (req, res) => {
+app.options('*', (req, res) => {
   res.setHeader('Access-Control-Allow-Origin', 'https://farming-harvesting.web.app');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, DELETE');
    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Autorization')
