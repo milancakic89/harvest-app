@@ -32,7 +32,10 @@ mongoose
   .connect(process.env.MONGO_DB)
   .then((responce) => {
 
-    app.listen(process.env.PORT || 3000);
+    app.listen(process.env.PORT || 3000, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  });
   })
   .catch((error) => {
     const err = new Error('error connecting to database');
